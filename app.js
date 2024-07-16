@@ -8,6 +8,7 @@ const bodyParser = require("body-parser"); //POST, PATCH
 const videogames_Data = require("./data/video-games.json");
 const user1games_Data = require("./data/user1-games");
 const user2games_Data = require("./data/user2-games");
+const userLib = require("./data/personal-game-libraries");
 
 const accountRoute = require("./routes/accountRoutes");
 
@@ -25,16 +26,16 @@ app.set("view engine", "ejs");
 app.get("/", (req, res) => {
   res.render("home", { data: videogames_Data });
 });
+
 app.get("/login", (req, res) => {
-  const username = req.body.username;
-  //   console.log(username);
+  res.render("login");
+});
+app.post("/login", (req, res) => {
   res.render("login");
 });
 
 //USER
 app.get("/user", (req, res) => {
-  const username = req.body.username;
-  //   console.log(username);
   if (username == users.username)
     res.render("games", {
       data: videogames_Data,
@@ -52,11 +53,26 @@ app.get("/user", (req, res) => {
 app.post("/user", (req, res) => {
   const username = req.body.username;
   let game = req.body.selection;
+  console.log(username);
   const newTitle = { Title: game };
   user1games_Data.push(newTitle);
+  let gameData;
+
+  users.forEach((user) => {
+    if (username == user.username) {
+      let id = user.id;
+      userLib.forEach((lib) => {
+        if (id == lib.id) {
+          gameData = lib.games;
+        }
+      });
+    } else {
+      gameData = [{ Title: "No saved games" }];
+    }
+  });
   res.render("games", {
     data: videogames_Data,
-    games: user1games_Data,
+    games: gameData,
     name: username,
   });
 });
