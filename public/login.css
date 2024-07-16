@@ -1,0 +1,26 @@
+body {
+    align-self: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: 0 auto;
+
+}
+
+form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+input:last-child {
+    margin-top: 1em;
+}
