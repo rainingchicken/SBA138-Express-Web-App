@@ -19,13 +19,37 @@ Must be done in postman
 
 /account/#
 
+```js
+{
+  "name":"someName",
+  "username":"someUserName"
+}
+```
+
 #### PATCH
 
 /account/#
 
+```js
+//at endpoint .../account/1
+{
+  "name":"differentName",
+  "username":"differentUserName"
+}
+```
+
 #### DELETE
 
 /account/#
+
+```js
+//at endpoint .../account/2
+//deletes
+{
+  "name":"Raymond",
+  "username":"ray"
+}
+```
 
 ## Requirements
 
@@ -96,7 +120,7 @@ router.delete("/:id", (req, res, next) => { ... })
 
 ```js
 //HOME
-app.get(("/"() = {}));
+app.get(("/" = {}));
 ```
 
 - Adhere to the guiding principles of REST.
